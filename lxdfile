@@ -1,0 +1,5 @@
+name=boiler-reader
+template=debian-10-buster
+host=boiler-reader.lxc
+delivery-user=delivery
+mount=.:/var/www/boiler-reader

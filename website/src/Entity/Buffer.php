@@ -89,11 +89,11 @@ class Buffer implements EntityInterface
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getDataAsArray(): array
+    public function getDataAsArray(): string
     {
-        return json_decode($this->data, true);
+        return print_r(json_decode($this->data, true), true);
     }
 
     /**

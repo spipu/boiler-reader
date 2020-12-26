@@ -63,7 +63,7 @@ class BufferForm implements EntityDefinitionInterface
                         'nbTry',
                         Type\IntegerType::class,
                         30,
-                        ['label'    => 'app.buffer.field.time']
+                        ['label'    => 'app.buffer.field.nb_try']
                     ))
                     ->addField(new Field(
                         'lastError',

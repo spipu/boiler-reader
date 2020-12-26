@@ -22,3 +22,11 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Service\Configuration:
+        arguments:
+            $boilerHost:  '%env(BOILER_HOST)%'
+            $boilerPort:  '%env(BOILER_PORT)%'
+            $pushApiUrl:  '%env(PUSH_API_URL)%'
+            $pushApiName: '%env(PUSH_API_NAME)%'
+            $pushApiKey:  '%env(PUSH_API_KEY)%'

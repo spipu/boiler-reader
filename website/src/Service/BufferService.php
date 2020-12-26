@@ -101,6 +101,7 @@ class BufferService
                 $this->entityManager->flush();
             } catch (Exception $e) {
                 $row->setNbTry($row->getNbTry() + 1);
+                $row->setLastError($e->getMessage());
                 $this->entityManager->flush();
                 throw $e;
             }

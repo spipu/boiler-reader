@@ -8,6 +8,7 @@ app:
       time:       "Time"
       data:       "Data"
       nb_try:     "Nb Try"
+      last_error: "Last Error"
       created_at: "Created"
       updated_at: "Updated"
     action:

@@ -66,15 +66,21 @@ class BufferForm implements EntityDefinitionInterface
                         ['label'    => 'app.buffer.field.time']
                     ))
                     ->addField(new Field(
+                        'lastError',
+                        Type\TextType::class,
+                        40,
+                        ['label'    => 'app.buffer.field.last_error']
+                    ))
+                    ->addField(new Field(
                         'createdAt',
                         Type\DateTimeType::class,
-                        40,
+                        50,
                         ['label'    => 'app.buffer.field.created_at']
                     ))
                     ->addField(new Field(
                         'updatedAt',
                         Type\DateTimeType::class,
-                        50,
+                        60,
                         ['label'    => 'app.buffer.field.updated_at']
                     ))
             )

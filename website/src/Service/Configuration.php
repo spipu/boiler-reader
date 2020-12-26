@@ -11,7 +11,7 @@ class Configuration
     private $boilerHost;
 
     /**
-     * @var string
+     * @var int
      */
     private $boilerPort;
 
@@ -33,14 +33,14 @@ class Configuration
     /**
      * Configuration constructor.
      * @param string $boilerHost
-     * @param string $boilerPort
+     * @param int $boilerPort
      * @param string $pushApiUrl
      * @param string $pushApiName
      * @param string $pushApiKey
      */
     public function __construct(
         string $boilerHost,
-        string $boilerPort,
+        int $boilerPort,
         string $pushApiUrl,
         string $pushApiName,
         string $pushApiKey
@@ -61,9 +61,9 @@ class Configuration
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getBoilerPort(): string
+    public function getBoilerPort(): int
     {
         return $this->boilerPort;
     }

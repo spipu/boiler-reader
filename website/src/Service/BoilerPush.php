@@ -30,6 +30,35 @@ class BoilerPush
      */
     public function push(Buffer $buffer): void
     {
-        throw new Exception('Not Ready');
+        $fields = array(
+            'username'     => $this->configuration->getPushApiName(),
+            'request_time' => time(),
+            'data_time'    => $buffer->getTime(),
+            'rand'         => uniqid(),
+            'values'       => $buffer->getData(),
+        );
+
+        $fields['token'] = sha1(implode($fields).$this->configuration->getPushApiKey());
+
+        try {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $this->configuration->getPushApiUrl());
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($fields));
+
+            if ($this->configuration->isDisableHttpsVerify()) {
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            }
+
+            $result = curl_exec($curl);
+            if (!$result) {
+                throw new Exception(curl_error($curl));
+            }
+        } finally {
+            curl_close($curl);
+        }
     }
 }

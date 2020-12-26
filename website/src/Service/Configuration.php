@@ -31,25 +31,33 @@ class Configuration
     private $pushApiKey;
 
     /**
+     * @var bool
+     */
+    private $disableHttpsVerify;
+
+    /**
      * Configuration constructor.
      * @param string $boilerHost
      * @param int $boilerPort
      * @param string $pushApiUrl
      * @param string $pushApiName
      * @param string $pushApiKey
+     * @param bool $disableHttpsVerify
      */
     public function __construct(
         string $boilerHost,
         int $boilerPort,
         string $pushApiUrl,
         string $pushApiName,
-        string $pushApiKey
+        string $pushApiKey,
+        bool $disableHttpsVerify = false
     ) {
         $this->boilerHost = $boilerHost;
         $this->boilerPort = $boilerPort;
         $this->pushApiUrl = $pushApiUrl;
         $this->pushApiName = $pushApiName;
         $this->pushApiKey = $pushApiKey;
+        $this->disableHttpsVerify = $disableHttpsVerify;
     }
 
     /**
@@ -90,5 +98,13 @@ class Configuration
     public function getPushApiKey(): string
     {
         return $this->pushApiKey;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisableHttpsVerify(): bool
+    {
+        return $this->disableHttpsVerify;
     }
 }

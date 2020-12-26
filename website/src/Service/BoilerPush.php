@@ -57,6 +57,10 @@ class BoilerPush
             if (!$result) {
                 throw new Exception(curl_error($curl));
             }
+            $result = trim($result);
+            if ($result !== 'OK') {
+                throw new Exception($result);
+            }
         } finally {
             curl_close($curl);
         }

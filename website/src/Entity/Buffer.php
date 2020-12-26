@@ -43,6 +43,11 @@ class Buffer implements EntityInterface
     private $nbTry = 0;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $lastError;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -111,6 +116,18 @@ class Buffer implements EntityInterface
     public function setNbTry(int $nbTry): self
     {
         $this->nbTry = $nbTry;
+
+        return $this;
+    }
+
+    public function getLastError(): ?string
+    {
+        return $this->lastError;
+    }
+
+    public function setLastError(?string $lastError): self
+    {
+        $this->lastError = $lastError;
 
         return $this;
     }

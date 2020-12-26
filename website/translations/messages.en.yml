@@ -1,0 +1,15 @@
+app:
+  buffer:
+    fieldset:
+      information: "Information"
+      data:        "Data"
+    field:
+      id:         "Id"
+      time:       "Time"
+      data:       "Data"
+      nb_try:     "Nb Try"
+      created_at: "Created"
+      updated_at: "Updated"
+    action:
+      show:       "Show"
+      back:       "Back"

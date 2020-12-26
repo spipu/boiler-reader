@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% set menuCurrentItem="home" %}
+
+{% block header_title %}{{  parent() }} - Home{% endblock %}
+
+{% block main_title %}Boiler Reader{% endblock %}
+
+{% block body %}{{ renderManager(manager) }}{% endblock %}

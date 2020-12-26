@@ -84,7 +84,11 @@ class BufferService
             $output->writeln('Get from buffer');
         }
 
-        $rows = $this->bufferRepository->findBy([], ['id' => 'ASC']);
+        $rows = $this->bufferRepository->findBy(
+            [],
+            ['id' => 'ASC'],
+            100
+        );
 
         if ($output) {
             $output->writeln('Push to server');

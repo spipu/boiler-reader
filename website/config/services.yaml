@@ -23,6 +23,7 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # Boiler Configuration
     App\Service\Configuration:
         arguments:
             $boilerHost:  '%env(BOILER_HOST)%'
@@ -30,3 +31,8 @@ services:
             $pushApiUrl:  '%env(PUSH_API_URL)%'
             $pushApiName: '%env(PUSH_API_NAME)%'
             $pushApiKey:  '%env(PUSH_API_KEY)%'
+
+    # Menu Definition
+    spipu.ui.service.menu_definition:
+        class: 'App\Service\MenuDefinition'
+        autowire: true

@@ -84,11 +84,11 @@ class BufferForm implements EntityDefinitionInterface
                     ->setCssClass('col-xs-12 col-md-6')
                     ->addField(
                         (new Field(
-                            'data',
+                            'dataAsArray',
                             Type\TextType::class,
                             50,
                             ['label'    => 'app.buffer.field.data']
-                        ))->setTemplateView('@app/view/data.html.twig')
+                        ))->setTemplateView('view/data.html.twig')
                     )
             )
         ;

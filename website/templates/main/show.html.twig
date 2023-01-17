@@ -8,7 +8,7 @@
 
 {% block main_actions %}
     {{ buttons.back(path('app_home')) }}
-    {{ buttons.defaultLink(path('app_buffer_show', {'id': manager.resource.id}), 'Delete', 'danger', 'trash') }}
+    {{ buttons.defaultLink(path('app_buffer_delete', {'id': manager.resource.id}), 'Delete', 'danger', 'trash') }}
 {% endblock main_actions %}
 
 {% block body %}{{ renderManager(manager) }}{% endblock body %}

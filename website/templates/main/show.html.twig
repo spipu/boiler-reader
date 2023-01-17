@@ -8,6 +8,7 @@
 
 {% block main_actions %}
     {{ buttons.back(path('app_home')) }}
+    {{ buttons.delete(path('app_buffer_show', {'id': manager.resource.id}), 'buffer_' ~ manager.resource.id) }}
 {% endblock main_actions %}
 
 {% block body %}{{ renderManager(manager) }}{% endblock body %}

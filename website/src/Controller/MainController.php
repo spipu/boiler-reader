@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class MainController
- * @Route("/")
  */
 class MainController extends AbstractController
 {
@@ -77,15 +76,13 @@ class MainController extends AbstractController
 
 
     /**
-     * @Route("/delete/{id}", name="app_buffer_delete", methods="DELETE")
-     * @param Request $request
+     * @Route("/delete/{id}", name="app_buffer_delete", methods="GET")
      * @param BufferRepository $bufferRepository
      * @param EntityManagerInterface $entityManager
      * @param int $id
      * @return Response
      */
     public function delete(
-        Request $request,
         BufferRepository $bufferRepository,
         EntityManagerInterface $entityManager,
         int $id
@@ -93,11 +90,6 @@ class MainController extends AbstractController
         $resource = $bufferRepository->findOneBy(['id' => $id]);
         if (!$resource) {
             throw $this->createNotFoundException();
-        }
-
-        if (!$this->isCsrfTokenValid('delete_buffer_' . $resource->getId(), $request->request->get('_token'))) {
-            $this->addFlash('danger', 'Token error');
-            return $this->redirectToRoute('app_home');
         }
 
         try {

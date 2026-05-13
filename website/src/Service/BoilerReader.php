@@ -31,6 +31,7 @@ class BoilerReader
      */
     public function read(): Buffer
     {
+        $socket = null;
         try {
             $socket = $this->connect();
             $values = $this->readValues($socket);

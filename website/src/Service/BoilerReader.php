@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -8,25 +9,16 @@ use Exception;
 
 class BoilerReader
 {
-    const BUFFER_SIZE=600;
+    private const BUFFER_SIZE = 600;
 
-    /**
-     * @var Configuration
-     */
-    private $configuration;
+    private ConfigurationService $configurationService;
 
-    /**
-     * BoilerReader constructor.
-     * @param Configuration $configuration
-     */
-    public function __construct(
-        Configuration $configuration
-    ) {
-        $this->configuration = $configuration;
+    public function __construct(ConfigurationService $configurationService)
+    {
+        $this->configurationService = $configurationService;
     }
 
     /**
-     * @return Buffer
      * @throws Exception
      */
     public function read(): Buffer
@@ -49,15 +41,14 @@ class BoilerReader
     }
 
     /**
-     * Connect to the boiler
      * @return resource
      * @throws Exception
      */
     private function connect()
     {
         $socket = fsockopen(
-            $this->configuration->getBoilerHost(),
-            $this->configuration->getBoilerPort(),
+            $this->configurationService->getBoilerHost(),
+            $this->configurationService->getBoilerPort(),
             $errorNumber,
             $errorString,
             10
@@ -71,10 +62,7 @@ class BoilerReader
     }
 
     /**
-     * Read the values from the boiler
-     *
      * @param resource $socket
-     * @return array
      * @throws Exception
      */
     protected function readValues($socket): array
@@ -101,8 +89,7 @@ class BoilerReader
     }
 
     /**
-     * @param resource $socket
-     * @return void
+     * @param resource|null $socket
      */
     protected function disconnect($socket): void
     {

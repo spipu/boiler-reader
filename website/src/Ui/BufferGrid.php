@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Ui;
 
@@ -8,19 +9,12 @@ use Spipu\UiBundle\Exception\GridException;
 use Spipu\UiBundle\Service\Ui\Definition\GridDefinitionInterface;
 use Spipu\UiBundle\Entity\Grid;
 
-/**
- * Class BufferGrid
- * @SuppressWarnings(PMD.CouplingBetweenObjects)
- */
+// phpcs:disable Generic.Files.LineLength.TooLong
 class BufferGrid implements GridDefinitionInterface
 {
-    /**
-     * @var Grid\Grid
-     */
-    private $definition;
+    private ?Grid\Grid $definition = null;
 
     /**
-     * @return Grid\Grid
      * @throws GridException
      */
     public function getDefinition(): Grid\Grid
@@ -33,7 +27,6 @@ class BufferGrid implements GridDefinitionInterface
     }
 
     /**
-     * @return void
      * @throws GridException
      */
     private function prepareGrid(): void

@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -15,10 +16,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BufferRepository extends ServiceEntityRepository
 {
-    /**
-     * BufferRepository constructor.
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Buffer::class);

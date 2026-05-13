@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% set menuCurrentItem="buffer" %}
+
+{% block header_title %}Boiler Reader - Buffer List{% endblock %}
+{% block main_title %}Buffer List{% endblock %}
+
+{% block body %}{{ renderManager(manager) }}{% endblock %}

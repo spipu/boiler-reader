@@ -1,0 +1,4 @@
+# www-data crontab file
+
+# Boiler Reader
+*    * * * * /var/www/boiler-reader/website/bin/console app:boiler:run > /var/www/boiler-reader/website/var/log/cron-boiler-run.log 2>&1

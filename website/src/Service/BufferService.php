@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -10,33 +11,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class BufferService
 {
-    /**
-     * @var BoilerReader
-     */
-    private $boilerReader;
+    private BoilerReader $boilerReader;
+    private EntityManagerInterface $entityManager;
+    private BufferRepository $bufferRepository;
+    private BoilerPush $boilerPush;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
-     * @var BufferRepository
-     */
-    private $bufferRepository;
-
-    /**
-     * @var BoilerPush
-     */
-    private $boilerPush;
-
-    /**
-     * BufferService constructor.
-     * @param BoilerReader $boilerReader
-     * @param EntityManagerInterface $entityManager
-     * @param BufferRepository $bufferRepository
-     * @param BoilerPush $boilerPush
-     */
     public function __construct(
         BoilerReader $boilerReader,
         EntityManagerInterface $entityManager,
@@ -50,55 +29,36 @@ class BufferService
     }
 
     /**
-     * @param OutputInterface $output
      * @throws Exception
      */
     public function readDataAndSaveInBuffer(OutputInterface $output): void
     {
-        if ($output) {
-            $output->writeln('Read from boiler');
-        }
+        $output->writeln('Read from boiler');
 
         $buffer = $this->boilerReader->read();
 
-        if ($output) {
-            $output->writeln('Save in buffer');
-        }
+        $output->writeln('Save in buffer');
 
         $this->entityManager->persist($buffer);
         $this->entityManager->flush();
 
-        if ($output) {
-            $output->writeln(sprintf(' => buffer id: %d', $buffer->getId()));
-        }
+        $output->writeln(sprintf(' => buffer id: %d', $buffer->getId()));
     }
 
     /**
-     * @param OutputInterface $output
-     * @return void
      * @throws Exception
      */
     public function pushDataFromBuffer(OutputInterface $output): void
     {
-        if ($output) {
-            $output->writeln('Get from buffer');
-        }
+        $output->writeln('Get from buffer');
 
-        $rows = $this->bufferRepository->findBy(
-            [],
-            ['id' => 'ASC'],
-            100
-        );
+        $rows = $this->bufferRepository->findBy([], ['id' => 'ASC'], 100);
 
-        if ($output) {
-            $output->writeln('Push to server');
-        }
+        $output->writeln('Push to server');
 
         foreach ($rows as $row) {
             try {
-                if ($output) {
-                    $output->writeln(sprintf(' => buffer id: %d', $row->getId()));
-                }
+                $output->writeln(sprintf(' => buffer id: %d', $row->getId()));
 
                 $this->boilerPush->push($row);
                 $this->entityManager->remove($row);
@@ -111,8 +71,6 @@ class BufferService
             }
         }
 
-        if ($output) {
-            $output->writeln('End');
-        }
+        $output->writeln('End');
     }
 }

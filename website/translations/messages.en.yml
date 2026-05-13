@@ -1,16 +1,36 @@
 app:
-  buffer:
-    fieldset:
-      information: "Information"
-      data:        "Data"
-    field:
-      id:         "Id"
-      time:       "Time"
-      data:       "Data"
-      nb_try:     "Nb Try"
-      last_error: "Last Error"
-      created_at: "Created"
-      updated_at: "Updated"
-    action:
-      show:       "Show"
-      back:       "Back"
+    page:
+        home:
+            title: "Home"
+        buffer:
+            title: "Buffer"
+            show: "Show #%id"
+
+    buffer:
+        field:
+            id:          "Id"
+            time:        "Time"
+            data:        "Data"
+            nb_try:      "Nb Try"
+            last_error:  "Last Error"
+            created_at:  "Created At"
+            updated_at:  "Updated At"
+        fieldset:
+            information: "Information"
+            data:        "Data"
+        action:
+            show:   "Show"
+            delete: "Delete"
+
+spipu:
+    dashboard:
+        source:
+            log-reader:
+                label: "Log - Reader"
+                title: "Log - Reader"
+            data-count-all:
+                label: "Buffer - Count - All"
+                title: "Buffer - Count - All"
+            data-count-error:
+                label: "Buffer - Count - Error"
+                title: "Buffer - Count - Error"

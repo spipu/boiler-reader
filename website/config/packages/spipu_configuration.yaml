@@ -1,0 +1,32 @@
+imports:
+    - { resource: "@SpipuConfigurationBundle/config/spipu_configuration.yaml" }
+    - { resource: "@SpipuUserBundle/config/spipu_configuration.yaml" }
+
+spipu_configuration:
+    app.website.name:
+        type:     string
+        required: true
+        default:  "Boiler Reader"
+
+    boiler.host:
+        type:     string
+        required: true
+        default:  "192.168.1.99"
+
+    boiler.port:
+        type:     integer
+        required: true
+        default:  "23"
+
+    boiler.push.url:
+        type:     url
+        required: true
+        default:  "https://external-website.fr/api"
+
+    boiler.push.api_name:
+        type:     string
+        required: true
+
+    boiler.push.api_key:
+        type:     encrypted
+        required: true

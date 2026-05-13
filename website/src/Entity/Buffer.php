@@ -1,72 +1,47 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\BufferRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Spipu\UiBundle\Entity\TimestampableTrait;
 use Spipu\UiBundle\Entity\EntityInterface;
 
-/**
- * @ORM\Entity(repositoryClass=BufferRepository::class)
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\BufferRepository')]
+#[ORM\HasLifecycleCallbacks]
 class Buffer implements EntityInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var int
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    private $time;
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $time;
 
-    /**
-     * @var string
-     * @ORM\Column(type="text")
-     */
-    private $data;
+    #[ORM\Column(type: Types::TEXT)]
+    private string $data;
 
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    private $nbTry = 0;
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $nbTry = 0;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $lastError;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $lastError = null;
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTime(): ?int
+    public function getTime(): int
     {
         return $this->time;
     }
 
-    /**
-     * @param int $time
-     * @return $this
-     */
     public function setTime(int $time): self
     {
         $this->time = $time;
@@ -74,18 +49,11 @@ class Buffer implements EntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getData(): ?string
+    public function getData(): string
     {
         return $this->data;
     }
 
-    /**
-     * @param string $data
-     * @return $this
-     */
     public function setData(string $data): self
     {
         $this->data = $data;
@@ -93,26 +61,16 @@ class Buffer implements EntityInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDataAsArray(): string
     {
         return print_r(json_decode($this->data, true), true);
     }
 
-    /**
-     * @return int
-     */
     public function getNbTry(): int
     {
         return $this->nbTry;
     }
 
-    /**
-     * @param int $nbTry
-     * @return $this
-     */
     public function setNbTry(int $nbTry): self
     {
         $this->nbTry = $nbTry;

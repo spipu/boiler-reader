@@ -37,6 +37,6 @@ class ConfigurationService
 
     public function getPushApiKey(): string
     {
-        return (string) $this->configurationManager->get('boiler.push.api_key');
+        return (string) $this->configurationManager->getEncrypted('boiler.push.api_key');
     }
 }

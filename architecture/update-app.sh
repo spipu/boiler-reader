@@ -34,7 +34,7 @@ echo ""
 
 if [ ! -d "$FOLDER/website/var" ]; then
     mkdir -p "$FOLDER/website/var"
-    chown lamin:www-data "$FOLDER/website/var"
+    chown yetijs:www-data "$FOLDER/website/var"
     chmod 775 "$FOLDER/website/var"
 fi
 

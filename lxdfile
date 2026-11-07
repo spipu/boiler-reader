@@ -1,5 +1,0 @@
-name=boiler-reader
-template=debian-13-trixie
-host=boiler-reader.lxc
-delivery-user=delivery
-mount=.:/var/www/boiler-reader

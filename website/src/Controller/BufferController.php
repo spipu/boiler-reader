@@ -9,10 +9,11 @@ use App\Ui\BufferForm;
 use App\Ui\BufferGrid;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Spipu\CoreBundle\Controller\AbstractController;
 use Spipu\UiBundle\Exception\UiException;
 use Spipu\UiBundle\Service\Ui\GridFactory;
 use Spipu\UiBundle\Service\Ui\ShowFactory;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -55,8 +56,9 @@ class BufferController extends AbstractController
         return $this->render('buffer/show.html.twig', ['manager' => $manager]);
     }
 
-    #[Route(path: '/buffer/delete/{id}', name: 'app_buffer_delete', methods: ['GET'])]
+    #[Route(path: '/buffer/delete/{id}', name: 'app_buffer_delete', methods: ['DELETE'])]
     public function delete(
+        Request $request,
         BufferRepository $bufferRepository,
         EntityManagerInterface $entityManager,
         int $id
@@ -64,6 +66,12 @@ class BufferController extends AbstractController
         $resource = $bufferRepository->findOneBy(['id' => $id]);
         if (!$resource) {
             throw $this->createNotFoundException();
+        }
+
+        if (!$this->isCsrfTokenValid('delete_buffer_' . $resource->getId(), $request->request->get('_token'))) {
+            $this->addFlashTrans('danger', 'spipu.ui.error.token');
+
+            return $this->redirectToRoute('app_buffer_show', ['id' => $resource->getId()]);
         }
 
         try {
